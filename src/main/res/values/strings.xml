@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Shanghai Electric</string>
+    <string name="account">Account:</string>
+    <string name="password">Password:</string>
+    <string name="remember_pass">Remember Password</string>
+    <string name="login">Login</string>
+    <string name="query">query</string>
+    <string name="cases">cases</string>
+    <string name="upload">upload</string>
+    <string name="user">user</string>
+</resources>
