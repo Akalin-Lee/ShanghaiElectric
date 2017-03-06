@@ -35,4 +35,13 @@
     <string name="change_password">修改密码</string>
     <string name="authority">我的权限？</string>
     <string name="help">帮助</string>
+    <string name="trouble_number">编号</string>
+    <string name="trouble_description">描述</string>
+    <string name="influence_factor">影响因子</string>
+    <string name="more">更多</string>
+    <string name="hang_up">收起</string>
+    <string name="explain">说明</string>
+    <string name="number">序号</string>
+    <string name="trouble_reason">故障原因</string>
+    <string name="handle_method">处理方法</string>
 </resources>

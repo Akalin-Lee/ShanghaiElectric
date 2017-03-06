@@ -1,8 +1,10 @@
 package com.shanghai_electric.shanghaielectric;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -161,8 +163,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 //        userImg.setImageResource(R.drawable.user);
 //        userTv.setTextColor(getResources().getColor(
 //                R.color.bottomtab_off));
-        Intent intent = new Intent(MainActivity.this,UploadActivity.class);
-        startActivity(intent);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setMessage("确定要上传案例吗？");
+        dialog.setCancelable(true);
+        dialog.setPositiveButton("是的", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(MainActivity.this,UploadActivity.class);
+                startActivity(intent);
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        dialog.show();
+
     }
 
     private void clickTab4Layout() {

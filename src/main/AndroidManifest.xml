@@ -35,7 +35,8 @@
         <activity android:name=".QueryActivity" />
         <activity android:name=".ResultListActivity" />
         <activity android:name=".CasesShowActivity" />
-        <activity android:name=".UploadActivity"></activity>
+        <activity android:name=".UploadActivity" />
+        <activity android:name=".RuleShowActivity"></activity>
     </application>
 
 </manifest>

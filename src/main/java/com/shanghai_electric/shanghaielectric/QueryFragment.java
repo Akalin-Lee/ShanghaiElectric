@@ -85,8 +85,8 @@ public class QueryFragment  extends Fragment{
         queryQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String deviceText = (String)queryDevice.getSelectedItem();
-                Toast.makeText(getContext(),deviceText, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(),RuleShowActivity.class);
+                startActivity(intent);
             }
         });
 
