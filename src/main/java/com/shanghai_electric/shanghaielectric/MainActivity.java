@@ -1,5 +1,6 @@
 package com.shanghai_electric.shanghaielectric;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -142,24 +143,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void clickTab3Layout() {
-        if (uploadFragment == null) {
-            uploadFragment = new UploadFragment();
-        }
-        addOrShowFragment(getSupportFragmentManager().beginTransaction(), uploadFragment);
+//        if (uploadFragment == null) {
+//            uploadFragment = new UploadFragment();
+//        }
+//        addOrShowFragment(getSupportFragmentManager().beginTransaction(), uploadFragment);
 
         // 设置底部tab变化
-        queryImg.setImageResource(R.drawable.query);
-        queryTv.setTextColor(getResources()
-                .getColor(R.color.bottomtab_off));
-        casesImg.setImageResource(R.drawable.cases);
-        casesTv.setTextColor(getResources().getColor(
-                R.color.bottomtab_off));
-        uploadImg.setImageResource(R.drawable.upload_on);
-        uploadTv.setTextColor(getResources().getColor(
-                R.color.bottomtab_on));
-        userImg.setImageResource(R.drawable.user);
-        userTv.setTextColor(getResources().getColor(
-                R.color.bottomtab_off));
+//        queryImg.setImageResource(R.drawable.query);
+//        queryTv.setTextColor(getResources()
+//                .getColor(R.color.bottomtab_off));
+//        casesImg.setImageResource(R.drawable.cases);
+//        casesTv.setTextColor(getResources().getColor(
+//                R.color.bottomtab_off));
+//        uploadImg.setImageResource(R.drawable.upload_on);
+//        uploadTv.setTextColor(getResources().getColor(
+//                R.color.bottomtab_on));
+//        userImg.setImageResource(R.drawable.user);
+//        userTv.setTextColor(getResources().getColor(
+//                R.color.bottomtab_off));
+        Intent intent = new Intent(MainActivity.this,UploadActivity.class);
+        startActivity(intent);
     }
 
     private void clickTab4Layout() {

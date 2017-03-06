@@ -10,18 +10,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,30 +30,20 @@ import com.shanghai_electric.shanghaielectric.util.OnItemSelectedListener;
 import java.io.File;
 import java.io.IOException;
 
-import static android.app.Activity.RESULT_OK;
-
-/**
- * Created by Akalin on 2017/2/28.
- */
-
-public class UploadFragment extends Fragment {
+public class UploadActivity extends AppCompatActivity {
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
     private Button uploadPhoto;
     private ImageView picture;
     private Uri imageUri;
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.upload_fragment,container,false);
-        return view;
-    }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        uploadPhoto = (Button)getActivity().findViewById(R.id.uploadPhoto);
-        picture = (ImageView)getActivity().findViewById(R.id.picture) ;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_upload);
+
+        uploadPhoto = (Button)findViewById(R.id.uploadPhoto);
+        picture = (ImageView)findViewById(R.id.picture) ;
         uploadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,10 +51,11 @@ public class UploadFragment extends Fragment {
             }
         });
     }
+
     private void showDialog() {
-        WindowManager wm = getActivity().getWindowManager();
+        WindowManager wm = getWindowManager();
         int mWidth = wm.getDefaultDisplay().getWidth();
-        DialogUtil.showItemSelectDialog(getActivity(),mWidth,onIllegalListener,"相机拍摄","从相册中选择");//可填添加任意多个Item呦  
+        DialogUtil.showItemSelectDialog(UploadActivity.this,mWidth,onIllegalListener,"相机拍摄","从相册中选择");//可填添加任意多个Item呦  
     }
 
     private OnItemSelectedListener onIllegalListener=new OnItemSelectedListener(){
@@ -85,8 +73,9 @@ public class UploadFragment extends Fragment {
             }
         }
     };
+
     private void takePhoto(){
-        File outputImage = new File(getActivity().getExternalCacheDir(), "output_image.jpg");
+        File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
         try {
             if (outputImage.exists()) {
                 outputImage.delete();
@@ -98,26 +87,29 @@ public class UploadFragment extends Fragment {
         if (Build.VERSION.SDK_INT < 24) {
             imageUri = Uri.fromFile(outputImage);
         } else {
-            imageUri = FileProvider.getUriForFile(getActivity(), "com.example.cameraalbumtest.fileprovider", outputImage);
+            imageUri = FileProvider.getUriForFile(UploadActivity.this, "com.example.cameraalbumtest.fileprovider", outputImage);
         }
         // 启动相机程序
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, TAKE_PHOTO);
     }
+
     private void chooseFromAlbum(){
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
+        if (ContextCompat.checkSelfPermission(UploadActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(UploadActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
         } else {
             openAlbum();
         }
 
     }
+
     private void openAlbum() {
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
         startActivityForResult(intent, CHOOSE_PHOTO); // 打开相册
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -125,12 +117,13 @@ public class UploadFragment extends Fragment {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openAlbum();
                 } else {
-                    Toast.makeText(getActivity(), "You denied the permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UploadActivity.this, "You denied the permission", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -138,7 +131,7 @@ public class UploadFragment extends Fragment {
                 if (resultCode == RESULT_OK) {
                     try {
                         // 将拍摄的照片显示出来
-                        Bitmap bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(imageUri));
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                         picture.setImageBitmap(bitmap);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -166,7 +159,7 @@ public class UploadFragment extends Fragment {
         String imagePath = null;
         Uri uri = data.getData();
         Log.d("TAG", "handleImageOnKitKat: uri is " + uri);
-        if (DocumentsContract.isDocumentUri(getActivity(), uri)) {
+        if (DocumentsContract.isDocumentUri(UploadActivity.this, uri)) {
             // 如果是document类型的Uri，则通过document id处理
             String docId = DocumentsContract.getDocumentId(uri);
             if("com.android.providers.media.documents".equals(uri.getAuthority())) {
@@ -196,7 +189,7 @@ public class UploadFragment extends Fragment {
     private String getImagePath(Uri uri, String selection) {
         String path = null;
         // 通过Uri和selection来获取真实的图片路径
-        Cursor cursor = getActivity().getContentResolver().query(uri, null, selection, null, null);
+        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
@@ -211,8 +204,7 @@ public class UploadFragment extends Fragment {
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
             picture.setImageBitmap(bitmap);
         } else {
-            Toast.makeText(getActivity(), "failed to get image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UploadActivity.this, "failed to get image", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

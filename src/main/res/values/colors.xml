@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="bottomtab_on">#072BF9</color>
     <color name="bottomtab_off">#2C2C2C</color>
+    <color name="split_line">#dddddd</color>
+    <color name="button_text_color">#dddddd</color>
 </resources>

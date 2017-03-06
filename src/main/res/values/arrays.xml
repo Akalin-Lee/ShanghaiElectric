@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="region">
+            <item>请选择</item>
+            <item>发电机</item>
+            <item>汽轮机</item>
+</string-array>
+    <string-array name="component">
+                <item>请选择</item>
+                <item>机座</item>
+                <item>主轴</item>
+    </string-array>
+</resources>

@@ -12,6 +12,7 @@
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:gravity="center"
             android:textSize="18sp"
             android:text="@string/account"/>
         <EditText
@@ -21,6 +22,10 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/split_line" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -30,6 +35,7 @@
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:gravity="center"
             android:textSize="18sp"
             android:text="@string/password"/>
         <EditText
@@ -40,6 +46,10 @@
             android:layout_gravity="center_vertical"
             android:inputType="textPassword"/>
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/split_line" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -58,10 +68,12 @@
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/login"
+        android:layout_height="50dp"
+        android:background="@drawable/button_shape"
         android:text="@string/login"
-        android:layout_margin="10dp"/>
+        android:textColor="@color/button_text_color"
+        android:textSize="@dimen/button_text_size"
+        android:layout_margin="20dp"/>
 
 
 </LinearLayout>
