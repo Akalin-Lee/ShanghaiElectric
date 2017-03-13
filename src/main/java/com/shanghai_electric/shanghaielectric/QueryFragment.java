@@ -130,7 +130,7 @@ public class QueryFragment  extends Fragment{
 
 
 
-
+        //发起查询的时候事件
         queryQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -187,7 +187,7 @@ public class QueryFragment  extends Fragment{
         });
 
 
-
+        //设备被选择时查询相应的部件
         queryDevice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -209,6 +209,7 @@ public class QueryFragment  extends Fragment{
             }
         });
 
+        //部件被选择的时候进行数据更新
         queryComponent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -255,7 +256,6 @@ public class QueryFragment  extends Fragment{
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,arr1);
         arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         queryComponent.setAdapter(arrayAdapter1);
-
 
     }
     private void initComponent(int component){

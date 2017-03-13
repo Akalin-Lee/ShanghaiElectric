@@ -30,6 +30,7 @@
             android:textSize="18sp"
             android:text="@string/cases_name"/>
         <EditText
+            android:id="@+id/cases_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

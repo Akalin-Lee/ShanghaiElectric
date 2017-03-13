@@ -32,8 +32,8 @@ public class CasesActivity extends AppCompatActivity {
         casesQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] data =  new String[]{"案例一","案例二","案例三","案例四","案例五","Activity"};
-                ResultListActivity.actionStart(CasesActivity.this,data);
+//                String[] data =  new String[]{"案例一","案例二","案例三","案例四","案例五","Activity"};
+//                ResultListActivity.actionStart(CasesActivity.this,data);
             }
         });
 

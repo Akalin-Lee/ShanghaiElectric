@@ -177,107 +177,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="@color/split_line" />
-            <LinearLayout
-                android:orientation="horizontal"
+            <ListView
+                android:id="@+id/trouble_explain"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:textSize="20sp"
-                    android:textColor="@color/content_color"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_gravity="center"
-                    android:text="1"/>
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/split_line" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/content_color"
-                    android:layout_gravity="center"
-                    android:text="动平衡精度低"
-                    />
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/split_line" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/content_color"
-                    android:layout_gravity="center"
-                    android:text="按技术要求对转自进行平衡"/>
+                android:layout_height="wrap_content"/>
 
-            </LinearLayout>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/split_line" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
->
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/content_color"
-                    android:layout_gravity="center"
-                    android:text="2"/>
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/split_line" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/content_color"
-                    android:layout_gravity="center"
-                    android:text="结构不合理"
-                    />
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/split_line" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/content_color"
-                    android:layout_gravity="center"
-                    android:text="转子除垢，进行修复"/>
-
-            </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="15dp"

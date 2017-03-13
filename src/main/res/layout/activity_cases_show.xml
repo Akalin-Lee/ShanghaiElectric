@@ -355,17 +355,18 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
+>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:gravity="center"
                     android:text="@string/trouble_number"/>
                 <ImageView
-                    android:layout_width="3dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/split_line" />
 
@@ -374,11 +375,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:gravity="center"
                     android:text="@string/trouble_description"
                     />
                 <ImageView
-                    android:layout_width="3dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/split_line" />
                 <TextView
@@ -386,6 +389,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:gravity="center"
                     android:text="@string/influence_factor"/>
 
