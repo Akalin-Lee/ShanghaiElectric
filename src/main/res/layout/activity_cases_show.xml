@@ -405,6 +405,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="@color/content_color"
                     android:gravity="center"
                     android:text="ECXVibra"/>
                 <ImageView
@@ -416,6 +417,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="@color/content_color"
                     android:gravity="center"
                     android:text="励端X向轴振"
                     />
@@ -428,6 +430,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="@color/content_color"
                     android:gravity="center"
                     android:text="0.4"/>
 
@@ -447,6 +450,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="@color/content_color"
                     android:gravity="center"
                     android:text="ECYVibra"/>
                 <ImageView
@@ -458,6 +462,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="@color/content_color"
                     android:gravity="center"
                     android:text="励端Y向轴振"
                     />
@@ -470,6 +475,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="20sp"
+                    android:textColor="@color/content_color"
                     android:gravity="center"
                     android:text="0.4"/>
 

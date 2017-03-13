@@ -74,6 +74,13 @@
         android:textColor="@color/button_text_color"
         android:textSize="@dimen/button_text_size"
         android:layout_margin="20dp"/>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminateDrawable="@drawable/progressbar"
+        />
 
 
 </LinearLayout>

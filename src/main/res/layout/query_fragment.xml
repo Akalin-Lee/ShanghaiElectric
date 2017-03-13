@@ -24,7 +24,6 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
         <TextView
             android:layout_width="90dp"
@@ -48,7 +47,6 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
         <TextView
             android:layout_width="90dp"
@@ -126,5 +124,11 @@
             android:textSize="@dimen/button_text_size"
             android:layout_margin="20dp"/>
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progress_bar_query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/progressbar"
+        android:visibility="gone"/>
 
 </LinearLayout>

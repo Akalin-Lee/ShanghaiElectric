@@ -44,4 +44,8 @@
     <string name="number">序号</string>
     <string name="trouble_reason">故障原因</string>
     <string name="handle_method">处理方法</string>
+    <string name="url">http://192.168.0.104:8080</string>
+    <string name="primary_path">/D1</string>
+    <string name="rule_path">/rule</string>
+    <string name="cases_path">/cases</string>
 </resources>

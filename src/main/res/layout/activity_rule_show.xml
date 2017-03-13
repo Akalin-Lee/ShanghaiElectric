@@ -23,9 +23,12 @@
                     android:textSize="18sp"
                     android:text="@string/trouble_name"/>
                 <TextView
+                    android:id="@+id/trouble_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18sp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <ImageView
@@ -46,9 +49,12 @@
                     android:textSize="18sp"
                     android:text="@string/device"/>
                 <TextView
+                    android:id="@+id/device"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18sp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
@@ -70,9 +76,12 @@
                     android:textSize="18sp"
                     android:text="@string/component"/>
                 <TextView
+                    android:id="@+id/component"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18sp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
@@ -94,9 +103,12 @@
                     android:textSize="18sp"
                     android:text="@string/explain"/>
                 <TextView
+                    android:id="@+id/explain"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18sp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <ImageView
@@ -121,18 +133,18 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
+                android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:textSize="20sp"
                     android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/number"/>
                 <ImageView
-                    android:layout_width="3dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/split_line" />
 
@@ -142,10 +154,12 @@
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/trouble_reason"
                     />
                 <ImageView
-                    android:layout_width="3dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/split_line" />
                 <TextView
@@ -154,6 +168,8 @@
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/handle_method"/>
 
             </LinearLayout>
@@ -164,15 +180,16 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
+                android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:textSize="20sp"
+                    android:textColor="@color/content_color"
                     android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_gravity="center"
                     android:text="1"/>
                 <ImageView
@@ -185,6 +202,9 @@
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/content_color"
                     android:layout_gravity="center"
                     android:text="动平衡精度低"
                     />
@@ -198,6 +218,9 @@
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/content_color"
                     android:layout_gravity="center"
                     android:text="按技术要求对转自进行平衡"/>
 
@@ -210,14 +233,16 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
+>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:textSize="20sp"
                     android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/content_color"
                     android:layout_gravity="center"
                     android:text="2"/>
                 <ImageView
@@ -230,6 +255,9 @@
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/content_color"
                     android:layout_gravity="center"
                     android:text="结构不合理"
                     />
@@ -243,6 +271,9 @@
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/content_color"
                     android:layout_gravity="center"
                     android:text="转子除垢，进行修复"/>
 
