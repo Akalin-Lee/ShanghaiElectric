@@ -17,7 +17,7 @@ import java.util.List;
 
 public class RuleShowActivity extends AppCompatActivity {
     String result = null;
-    RuleShow ruleShow;
+    RuleShow ruleShow=null;
     List<ExplainItem> trouble_explain;
 
     TextView trouble_name;
@@ -54,7 +54,7 @@ public class RuleShowActivity extends AppCompatActivity {
         explain.setText(ruleShow.getFuzzy_word());
         ExplainAdapter adapter = new ExplainAdapter(RuleShowActivity.this,R.layout.explain_item,trouble_explain);
         trouble_explain_list.setAdapter(adapter);
-
+        MyListView.setListViewHeightBasedOnChildren(trouble_explain_list);
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 

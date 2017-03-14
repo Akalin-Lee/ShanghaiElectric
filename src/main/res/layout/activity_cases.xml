@@ -211,7 +211,7 @@
         <Button
             android:id="@+id/cases_query"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/button_height"
             android:background="@drawable/button_shape"
             android:text="@string/query"
             android:textColor="@color/button_text_color"

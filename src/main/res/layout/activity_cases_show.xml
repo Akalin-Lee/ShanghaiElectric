@@ -23,9 +23,12 @@
                     android:textSize="18sp"
                     android:text="@string/cases_name"/>
                 <TextView
+                    android:id="@+id/case_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18sp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <ImageView
@@ -46,9 +49,12 @@
                     android:textSize="18sp"
                     android:text="@string/trouble"/>
                 <TextView
+                    android:id="@+id/trouble"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18sp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
@@ -70,9 +76,12 @@
                     android:textSize="18sp"
                     android:text="@string/device"/>
                 <TextView
+                    android:id="@+id/device"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18sp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
@@ -94,9 +103,12 @@
                     android:textSize="18sp"
                     android:text="@string/component"/>
                 <TextView
+                    android:id="@+id/component"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18sp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <ImageView
@@ -116,6 +128,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textSize="18sp"
+                    android:textColor="@color/content_color"
                     android:text="@string/more"/>
             </LinearLayout>
 
@@ -143,9 +156,12 @@
                         android:textSize="18sp"
                         android:text="@string/cases_time"/>
                     <TextView
+                        android:id="@+id/case_time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_gravity="center_vertical"/>
                 </LinearLayout>
                 <ImageView
@@ -166,9 +182,12 @@
                         android:textSize="18sp"
                         android:text="@string/handle_people"/>
                     <TextView
+                        android:id="@+id/handle_people"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_gravity="center_vertical"/>
 
                 </LinearLayout>
@@ -192,9 +211,12 @@
                         android:textSize="18sp"
                         android:text="@string/information"/>
                     <TextView
+                        android:id="@+id/information"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_gravity="center_vertical"/>
                 </LinearLayout>
                 <ImageView
@@ -215,9 +237,12 @@
                         android:textSize="18sp"
                         android:text="@string/supplier"/>
                     <TextView
+                        android:id="@+id/supplier"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_gravity="center_vertical"/>
                 </LinearLayout>
                 <ImageView
@@ -238,9 +263,12 @@
                         android:textSize="18sp"
                         android:text="@string/arrange_people"/>
                     <TextView
+                        android:id="@+id/arrange_people"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_gravity="center_vertical"/>
                 </LinearLayout>
                 <ImageView
@@ -261,9 +289,12 @@
                         android:textSize="18sp"
                         android:text="@string/contact"/>
                     <TextView
+                        android:id="@+id/contact"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_gravity="center_vertical"/>
                 </LinearLayout>
                 <ImageView
@@ -284,9 +315,12 @@
                         android:textSize="18sp"
                         android:text="@string/department"/>
                     <TextView
+                        android:id="@+id/department"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_gravity="center_vertical"/>
                 </LinearLayout>
                 <ImageView
@@ -307,9 +341,12 @@
                         android:textSize="18sp"
                         android:text="@string/review_people"/>
                     <TextView
+                        android:id="@+id/review_people"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="18sp"
                         android:layout_gravity="center_vertical"/>
                 </LinearLayout>
                 <ImageView
@@ -329,6 +366,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textSize="18sp"
+                        android:textColor="@color/content_color"
                         android:text="@string/hang_up"/>
                 </LinearLayout>
             </LinearLayout>
@@ -342,9 +380,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:text="影响因子"
+                    android:text="@string/factor"
                     android:textSize="20sp"
+                    android:padding="5dp"
                     android:layout_margin="5dp"/>
             </LinearLayout>
             <ImageView
@@ -399,92 +437,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="@color/split_line" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="@color/content_color"
-                    android:gravity="center"
-                    android:text="ECXVibra"/>
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/split_line" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="@color/content_color"
-                    android:gravity="center"
-                    android:text="励端X向轴振"
-                    />
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/split_line" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="@color/content_color"
-                    android:gravity="center"
-                    android:text="0.4"/>
 
-            </LinearLayout>
-            <ImageView
+            <com.shanghai_electric.shanghaielectric.MyListView
+                android:id="@+id/influnce_factor"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/split_line" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="@color/content_color"
-                    android:gravity="center"
-                    android:text="ECYVibra"/>
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/split_line" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="@color/content_color"
-                    android:gravity="center"
-                    android:text="励端Y向轴振"
-                    />
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/split_line" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="@color/content_color"
-                    android:gravity="center"
-                    android:text="0.4"/>
+                android:layout_height="wrap_content"/>
 
-            </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
@@ -497,6 +455,7 @@
                     android:layout_height="wrap_content"
                     android:text="上传附件"
                     android:textSize="20sp"
+                    android:padding="5dp"
                     android:layout_margin="5dp"/>
             </LinearLayout>
             <ImageView
@@ -507,9 +466,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/attachment_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="发动机机座振动和噪声异常分析报告.doc"
                     android:textColor="#0000ff"
                     android:textSize="15sp"
                     android:layout_margin="10dp"/>

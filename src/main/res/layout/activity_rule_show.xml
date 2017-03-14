@@ -121,7 +121,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:padding="5dp"
                     android:text="故障解释"
                     android:textSize="20sp"
                     android:layout_margin="5dp"/>
@@ -177,7 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="@color/split_line" />
-            <ListView
+            <com.shanghai_electric.shanghaielectric.MyListView
                 android:id="@+id/trouble_explain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -55,9 +56,12 @@ public class QueryFragment  extends Fragment{
     private EditText fuzzyQuery;
     private TextView moreChoices;
     private ProgressBar progressbar;
+    private LinearLayout fuzzyQueryLayout;
 
-    String[] arr = new String[]{"请选择"};
-    String[] arr1 = new String[]{"请选择"};
+    String[] defaultString1 = new String[]{"请选择"};
+    String[] defaultString2 = new String[]{"请先选择设备"};
+    String[] arr = defaultString1;
+    String[] arr1 = defaultString2;
     String device = null;
     String component = null;
     String fuzzyWord = null;
@@ -97,6 +101,7 @@ public class QueryFragment  extends Fragment{
         fuzzyQuery = (EditText)getActivity().findViewById(R.id.fuzzy_query_text);
         moreChoices = (TextView) getActivity().findViewById(R.id.query_more_choices);
         progressbar = (ProgressBar)getActivity().findViewById(R.id.progress_bar_query);
+        fuzzyQueryLayout = (LinearLayout)getActivity().findViewById(R.id.fuzzy_query_layout);
         final KeyListener key = fuzzyQuery.getKeyListener();
 
 
@@ -116,11 +121,13 @@ public class QueryFragment  extends Fragment{
                 if(fuzzyQuery.getKeyListener()!=null){
                 KeyListener key =fuzzyQuery.getKeyListener(); }
                 if(b){
+                    fuzzyQueryLayout.setVisibility(View.VISIBLE);
                     fuzzyQuery.setKeyListener(key);
                     fuzzyQuery.setFocusable(true);
                     fuzzyQuery.setFocusableInTouchMode(true);
                     fuzzyQuery.requestFocus();
                 }else{
+                    fuzzyQueryLayout.setVisibility(View.GONE);
                     fuzzyQuery.setText("");
                     fuzzyQuery.setFocusable(false);
                     fuzzyQuery.setKeyListener(null);
@@ -199,6 +206,9 @@ public class QueryFragment  extends Fragment{
                         device = (String)queryDevice.getSelectedItem();
                     }else{
                         device=null;
+                        arr1 = defaultString2;
+                        initSpinner2();
+                        queryComponent.setEnabled(false);
                     }
                 }
             }
@@ -249,13 +259,14 @@ public class QueryFragment  extends Fragment{
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,arr);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         queryDevice.setAdapter(arrayAdapter);
-
+        progressbar.setVisibility(View.GONE);
 
     }
     private void initSpinner2(){
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,arr1);
         arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         queryComponent.setAdapter(arrayAdapter1);
+        queryComponent.setEnabled(true);
 
     }
     private void initComponent(int component){

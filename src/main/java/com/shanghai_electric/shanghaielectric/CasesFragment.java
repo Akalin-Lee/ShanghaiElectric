@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.method.KeyListener;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,9 +50,12 @@ public class CasesFragment extends Fragment {
     private CheckBox isFuzzyQuery;
     private EditText fuzzyQuery,casesName;
     private TextView moreChoices;
+    private LinearLayout fuzzyCasesLayout;
 
-    String[] arr = new String[]{"请选择"};
-    String[] arr1 = new String[]{"请选择"};
+    String[] defaultString1 = new String[]{"请选择"};
+    String[] defaultString2 = new String[]{"请先选择设备"};
+    String[] arr = defaultString1;
+    String[] arr1 = defaultString2;
     String device = null;
     String component = null;
     String fuzzyWord = null;
@@ -70,6 +75,8 @@ public class CasesFragment extends Fragment {
                 case SHOW_ANSWER2:
                     String ans = (String)msg.obj;
                     ResultListActivity.actionStart(getActivity(),ans);
+
+                    break;
             }
         }
     };
@@ -90,6 +97,7 @@ public class CasesFragment extends Fragment {
         fuzzyQuery = (EditText)getActivity().findViewById(R.id.fuzzy_cases_text);
         moreChoices = (TextView) getActivity().findViewById(R.id.cases_more_choices);
         casesName = (EditText)getActivity().findViewById(R.id.cases_name);
+        fuzzyCasesLayout = (LinearLayout)getActivity().findViewById(R.id.fuzzy_cases_layout);
         final KeyListener key = fuzzyQuery.getKeyListener();
 
         //进入详细查询界面
@@ -108,11 +116,13 @@ public class CasesFragment extends Fragment {
                 if(fuzzyQuery.getKeyListener()!=null){
                     KeyListener key =fuzzyQuery.getKeyListener(); }
                 if(b){
+                    fuzzyCasesLayout.setVisibility(View.VISIBLE);
                     fuzzyQuery.setKeyListener(key);
                     fuzzyQuery.setFocusable(true);
                     fuzzyQuery.setFocusableInTouchMode(true);
                     fuzzyQuery.requestFocus();
                 }else{
+                    fuzzyCasesLayout.setVisibility(View.GONE);
                     fuzzyQuery.setText("");
                     fuzzyQuery.setFocusable(false);
                     fuzzyQuery.setKeyListener(null);
@@ -189,6 +199,9 @@ public class CasesFragment extends Fragment {
                         device = (String)queryDevice.getSelectedItem();
                     }else{
                         device=null;
+                        arr1 = defaultString2;
+                        initSpinner2();
+                        queryComponent.setEnabled(false);
                     }
                 }
             }
@@ -203,11 +216,12 @@ public class CasesFragment extends Fragment {
         queryComponent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0) {
-                    component = (String)queryComponent.getSelectedItem();
-                }else{
-                    component=null;
-                }
+                    if (i != 0) {
+                        component = (String) queryComponent.getSelectedItem();
+                    } else {
+                        component = null;
+                    }
+
             }
 
             @Override
@@ -232,6 +246,7 @@ public class CasesFragment extends Fragment {
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,arr1);
         arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         queryComponent.setAdapter(arrayAdapter1);
+        queryComponent.setEnabled(true);
 
     }
 

@@ -48,4 +48,5 @@
     <string name="primary_path">/D1</string>
     <string name="rule_path">/rule</string>
     <string name="cases_path">/cases</string>
+    <string name="factor">影响因子</string>
 </resources>

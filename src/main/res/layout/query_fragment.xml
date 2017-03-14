@@ -2,22 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="10dp"
+        android:background="@color/split_line" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/trouble_diagnose"
             android:padding="10dp"
             android:textSize="20sp"
             android:gravity="center"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:background="@color/split_line" />
+
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/split_line" />
 
     <LinearLayout
         android:id="@+id/query_device_tag"
@@ -93,6 +100,7 @@
         android:layout_height="wrap_content">
         <CheckBox
             android:id="@+id/is_fuzzy_query"
+            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -103,12 +111,22 @@
             android:text="@string/fuzzy_query"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/fuzzy_query_layout"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="40dp"
+        android:visibility="gone"
+        >
         <EditText
             android:id="@+id/fuzzy_query_text"
+            android:background="@drawable/edit_shape"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:focusable="false"/>
     </LinearLayout>
     <LinearLayout
@@ -117,7 +135,7 @@
         <Button
             android:id="@+id/query_query"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/button_height"
             android:background="@drawable/button_shape"
             android:text="@string/query"
             android:textColor="@color/button_text_color"
@@ -128,7 +146,6 @@
         android:id="@+id/progress_bar_query"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:indeterminateDrawable="@drawable/progressbar"
-        android:visibility="gone"/>
+        android:indeterminateDrawable="@drawable/progressbar"/>
 
 </LinearLayout>

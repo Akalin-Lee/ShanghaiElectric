@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/split_line" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,6 +39,7 @@
             <TextView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/illustrate"
                 android:gravity="center" />
 
@@ -45,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:background="#00ffffff"
+                android:layout_margin="5dp"
                 android:gravity="start|center_vertical"
                 android:text="@string/illustrate"
                 android:textSize="20sp" />
@@ -63,6 +68,7 @@
             <TextView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/change_password"
                 android:gravity="center" />
 
@@ -72,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:background="#00ffffff"
+                android:layout_margin="5dp"
                 android:gravity="start|center_vertical"
                 android:text="@string/change_password"
                 android:textSize="20sp" />
@@ -90,6 +97,7 @@
             <TextView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/log_off"
                 android:gravity="center" />
 
@@ -99,6 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:background="#00ffffff"
+                android:layout_margin="5dp"
                 android:gravity="start|center_vertical"
                 android:text="@string/log_off"
                 android:textSize="20sp" />
@@ -134,7 +143,7 @@
             android:autoLink="all"
             android:clickable="true"
             android:gravity="center_vertical"
-            android:paddingEnd="30dp"
+            android:paddingEnd="15dp"
             android:text="@string/authority"
             android:textColor="#0000ff" />
 
