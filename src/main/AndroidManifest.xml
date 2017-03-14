@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".util.MyApplication"
@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
+            <intent-filter>A
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -35,9 +35,15 @@
         <activity android:name=".CasesActivity" />
         <activity android:name=".QueryActivity" />
         <activity android:name=".ResultListActivity" />
-        <activity android:name=".CasesShowActivity" />
+        <activity android:name=".CasesShowActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".UploadActivity" />
-        <activity android:name=".RuleShowActivity"></activity>
+        <activity android:name=".RuleShowActivity" />
+
+        <service
+            android:name=".Service.DownloadService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

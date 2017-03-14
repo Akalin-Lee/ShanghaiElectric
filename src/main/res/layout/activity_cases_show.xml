@@ -471,7 +471,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="#0000ff"
                     android:textSize="15sp"
-                    android:layout_margin="10dp"/>
+                    android:layout_margin="15dp"
+                    android:clickable="true"/>
             </LinearLayout>
 
         </LinearLayout>
