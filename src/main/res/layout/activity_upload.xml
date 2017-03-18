@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
@@ -22,12 +24,20 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/cases_name"/>
-                <EditText
+                <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
                     android:id="@+id/upload_cases_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_delete_01"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:deletecolor="@color/one_clear"
+                    />
+
             </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -46,12 +56,19 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/trouble_name"/>
-                <EditText
+                <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
                     android:id="@+id/upload_trouble_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_delete_01"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:deletecolor="@color/one_clear"
+                    />
             </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -70,12 +87,31 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/cases_time"/>
-                <EditText
+                <!--<com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText-->
+                    <!--android:id="@+id/upload_cases_time"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:drawableRight="@drawable/ic_delete_01"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:layout_marginRight="5dp"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:textCursorDrawable="@drawable/cursor"-->
+                    <!--app:deletecolor="@color/one_clear"-->
+                    <!--/>-->
+                <TextView
                     android:id="@+id/upload_cases_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:clickable="true"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"/>
+
             </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -94,12 +130,19 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/handle_people"/>
-                <EditText
+                <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
                     android:id="@+id/upload_handle_people"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_delete_01"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:deletecolor="@color/one_clear"
+                    />
 
             </LinearLayout>
             <ImageView
@@ -121,12 +164,21 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/information"/>
-                <EditText
+                <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
                     android:id="@+id/upload_information"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_delete_01"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:deletecolor="@color/one_clear"
+                    />
+
+
             </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -145,12 +197,19 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/supplier"/>
-                <EditText
+                <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
                     android:id="@+id/upload_supplier"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_delete_01"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:deletecolor="@color/one_clear"
+                    />
             </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -169,12 +228,20 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/arrange_people"/>
-                <EditText
-                    android:id="@+id/query_arrange_people"
+                <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
+                    android:id="@+id/upload_arrange_people"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_delete_01"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:deletecolor="@color/one_clear"
+                    />
+
             </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -193,12 +260,20 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/contact"/>
-                <EditText
+                <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
                     android:id="@+id/upload_contact"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_delete_01"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:deletecolor="@color/one_clear"
+                    />
+
             </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -217,12 +292,20 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/department"/>
-                <EditText
+                <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
                     android:id="@+id/upload_department"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_delete_01"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:deletecolor="@color/one_clear"
+                    />
+
             </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -241,13 +324,25 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:text="@string/review_people"/>
-                <EditText
+                <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
                     android:id="@+id/upload_review_people"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:drawableRight="@drawable/ic_delete_01"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:textCursorDrawable="@drawable/cursor"
+                    app:deletecolor="@color/one_clear"
+                    />
+
             </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/split_line" />
 
 
 
@@ -258,9 +353,10 @@
 
                 <Button
                     android:id="@+id/uploadPhoto"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:background="#ffffff"
                     android:text="@string/upload_photo"/>
                 <ImageView
                     android:id="@+id/picture"
@@ -280,7 +376,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/cases_query"
+                    android:id="@+id/cases_upload"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/button_shape"

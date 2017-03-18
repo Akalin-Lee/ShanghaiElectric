@@ -14,6 +14,13 @@
         <item name="android:windowExitAnimation">@anim/pop_out</item>
     </style>
 
+    <style name="CustomDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorAccent">#9a9b98</item>
+    </style>
+
+
     <style name="Dialog_Transparent_Theme" parent="android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <!-- 边框 -->
@@ -30,5 +37,9 @@
         <item name="android:windowContentOverlay">@null</item>
         <!-- 除去背景色 -->
     </style>
+
+    <declare-styleable name="OneKeyClearEditText">
+        <attr name="deletecolor" format="reference|color" />
+    </declare-styleable>
 
 </resources>

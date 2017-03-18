@@ -55,7 +55,7 @@ public class RuleShowActivity extends AppCompatActivity {
         ExplainAdapter adapter = new ExplainAdapter(RuleShowActivity.this,R.layout.explain_item,trouble_explain);
         trouble_explain_list.setAdapter(adapter);
         MyListView.setListViewHeightBasedOnChildren(trouble_explain_list);
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
     public static void actionStart(Context context,String data){

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_login"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -15,12 +16,21 @@
             android:gravity="center"
             android:textSize="18sp"
             android:text="@string/account"/>
-        <EditText
+        <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
             android:id="@+id/account"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:drawableRight="@drawable/ic_delete_01"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="10dp"
+            android:gravity="left"
+            android:textCursorDrawable="@drawable/cursor"
+            app:deletecolor="@color/one_clear"
+            />
+
     </LinearLayout>
     <ImageView
         android:layout_width="match_parent"
@@ -38,13 +48,21 @@
             android:gravity="center"
             android:textSize="18sp"
             android:text="@string/password"/>
-        <EditText
+        <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
             android:id="@+id/password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:drawableRight="@drawable/ic_delete_01"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="left"
+            android:paddingLeft="10dp"
+            android:textCursorDrawable="@drawable/cursor"
+            app:deletecolor="@color/one_clear"
+            />
     </LinearLayout>
     <ImageView
         android:layout_width="match_parent"
@@ -75,13 +93,13 @@
         android:textColor="@color/button_text_color"
         android:textSize="@dimen/button_text_size"
         android:layout_margin="20dp"/>
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:indeterminateDrawable="@drawable/progressbar"
-        />
+    <!--<ProgressBar-->
+        <!--android:id="@+id/progress_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone"-->
+        <!--android:indeterminateDrawable="@drawable/progressbar"-->
+        <!--/>-->
 
 
 </LinearLayout>

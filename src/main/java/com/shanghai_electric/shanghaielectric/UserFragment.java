@@ -61,6 +61,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
             case R.id.log_off:
                 ActivityCollector.finshAll();
                 Intent intent  = new Intent(getContext(),LoginActivity.class);
+                intent.putExtra("logoff","logoff");
                 getContext().startActivity(intent);
                 break;
             default:

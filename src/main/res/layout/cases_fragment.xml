@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
         android:layout_width="match_parent"
@@ -33,12 +35,19 @@
             android:gravity="center"
             android:textSize="18sp"
             android:text="@string/cases_name"/>
-        <EditText
+        <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
             android:id="@+id/cases_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:drawableRight="@drawable/ic_delete_01"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:textCursorDrawable="@drawable/cursor"
+            app:deletecolor="@color/one_clear"
+            />
     </LinearLayout>
     <ImageView
         android:layout_width="match_parent"
@@ -61,6 +70,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
     <ImageView
@@ -84,6 +95,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
     <ImageView

@@ -2,7 +2,10 @@ package com.shanghai_electric.shanghaielectric;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.ContentUris;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,40 +13,249 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.shanghai_electric.shanghaielectric.util.DialogUtil;
+import com.shanghai_electric.shanghaielectric.util.NetWorkUtil;
 import com.shanghai_electric.shanghaielectric.util.OnItemSelectedListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class UploadActivity extends AppCompatActivity {
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
-    private Button uploadPhoto;
+    public static final int UPLOAD_RESULT = 3;
+    public static final int NOT_RESPONSE=-1;
+
+    private Button uploadPhoto,casesUpload;
     private ImageView picture;
     private Uri imageUri;
+    private TextView casesTimeView;
+    private EditText casesNameView,troubleNameView,handlePeopleView,informationView,supplierView,arrangePeopleView,contactView,departmentView,reviewPeopleView;
+    private String casesName,troubleName,casesTime,handlePeople,information,supplier,arrangePeople,contact,department,reviewPeople;
+    private CustomDialog waitDialog;
+
+    private Handler handler = new Handler(){
+        public void handleMessage(Message msg){
+            switch(msg.what){
+                case UPLOAD_RESULT:
+                    String result = (String)msg.obj;
+                    waitDialog.cancel();
+                    Toast.makeText(UploadActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
+//                    finish();
+                    break;
+                case NOT_RESPONSE:
+                   waitDialog.cancel();
+                    Toast.makeText(UploadActivity.this, "上传失败，请稍后再试", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+    private void showDialogPick(final TextView timeText) {
+        final StringBuffer time = new StringBuffer();
+        //获取Calendar对象，用于获取当前时间
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        //实例化TimePickerDialog对象
+        final TimePickerDialog timePickerDialog = new TimePickerDialog(UploadActivity.this, new TimePickerDialog.OnTimeSetListener() {
+            //选择完时间后会调用该回调函数
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                time.append(" " + hourOfDay + ":" + minute);
+                //设置TextView显示最终选择的时间
+                timeText.setText(time);
+            }
+        }, hour, minute, true);
+        //实例化DatePickerDialog对象
+        DatePickerDialog datePickerDialog = new DatePickerDialog(UploadActivity.this, new DatePickerDialog.OnDateSetListener() {
+            //选择完日期后会调用该回调函数
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                //因为monthOfYear会比实际月份少一月所以这边要加1
+                time.append(year + "-" + (monthOfYear+1) + "-" + dayOfMonth);
+                timeText.setText(time);
+                //选择完日期后弹出选择时间对话框
+//                        timePickerDialog.show();
+            }
+        }, year, month, day);
+        //弹出选择日期对话框
+        datePickerDialog.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
+        casesNameView=(EditText) findViewById(R.id.upload_cases_name);
+        troubleNameView=(EditText)findViewById(R.id.upload_trouble_name);
+        casesTimeView=(TextView)findViewById(R.id.upload_cases_time);
+        handlePeopleView=(EditText)findViewById(R.id.upload_handle_people);
+        informationView=(EditText)findViewById(R.id.upload_information);
+        supplierView=(EditText)findViewById(R.id.upload_supplier);
+        arrangePeopleView=(EditText)findViewById(R.id.upload_arrange_people);
+        contactView=(EditText)findViewById(R.id.upload_contact);
+        departmentView=(EditText)findViewById(R.id.upload_department);
+        reviewPeopleView=(EditText)findViewById(R.id.upload_review_people);
+        waitDialog = new CustomDialog(UploadActivity.this,R.style.CustomDialog);
+
         uploadPhoto = (Button)findViewById(R.id.uploadPhoto);
         picture = (ImageView)findViewById(R.id.picture) ;
+        casesUpload = (Button)findViewById(R.id.cases_upload);
+
+//        contactView.addTextChangedListener(new TextWatcher() {
+//                    @Override
+//                            public void afterTextChanged(Editable s) {
+//                            // TODO Auto-generated method stub
+//                        }
+//
+//                            @Override
+//                            public void beforeTextChanged(CharSequence s, int start, int count,
+//                                    int after) {
+//                            // TODO Auto-generated method stub
+//                        }
+//
+//                            @Override
+//                            public void onTextChanged(CharSequence s, int start, int before,
+//                                    int count) {
+//                            String temp = s.toString();
+//                            String addChar = temp.substring(start);
+//                            String str = contactView.getText().toString();
+//                            if (temp.length() == 3 || temp.length() == 8) {
+//                                    if (TextUtils.isEmpty(addChar)) {
+//                                            temp += "-";
+//                                            contactView.setText(temp);
+//                                            contactView.setSelection(temp.length());
+//                                        }
+//                                }
+//                        }
+//        });
+
+        casesTimeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogPick(casesTimeView);
+            }
+        });
+
+        casesUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(UploadActivity.this);
+                dialog.setMessage("确定上传？");
+                dialog.setCancelable(true);
+                dialog.setPositiveButton("是的", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(!NetWorkUtil.isNetworkConnected(UploadActivity.this)){
+                            Toast.makeText(UploadActivity.this, "网络不可用，请检查您的网络设置", Toast.LENGTH_SHORT).show();
+                        }else {
+                            waitDialog.show();
+                            casesName = casesNameView.getText().toString();
+                            troubleName = troubleNameView.getText().toString();
+                            casesTime = casesTimeView.getText().toString();
+                            handlePeople = handlePeopleView.getText().toString();
+                            information = informationView.getText().toString();
+                            supplier = supplierView.getText().toString();
+                            arrangePeople = arrangePeopleView.getText().toString();
+                            contact = contactView.getText().toString();
+                            department = departmentView.getText().toString();
+                            reviewPeople = reviewPeopleView.getText().toString();
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        final String url = getString(R.string.url)
+                                                + getString(R.string.primary_path) + "/upload";
+                                        OkHttpClient client = new OkHttpClient();
+                                        RequestBody requestBody = new FormBody.Builder()
+                                                .add("casesName", casesName)
+                                                .add("troubleName", troubleName)
+                                                .add("casesTime", casesTime)
+                                                .add("handlePeople", handlePeople)
+                                                .add("information", information)
+                                                .add("supplier", supplier)
+                                                .add("arrangePeople", arrangePeople)
+                                                .add("contact", contact)
+                                                .add("department", department)
+                                                .add("reviewPeople", reviewPeople)
+                                                .build();
+                                        Request request = new Request.Builder()
+                                                .url(url)
+                                                .post(requestBody)
+                                                .build();
+                                        final Response response = client.newCall(request).execute();
+                                        if (response.isSuccessful()) {
+                                            String responseData = response.body().string();
+                                            Message message = new Message();
+                                            message.what = UPLOAD_RESULT;
+                                            message.obj = responseData;
+                                            handler.sendMessage(message);
+                                        } else {
+                                            Message message = new Message();
+                                            message.what = NOT_RESPONSE;
+                                            handler.sendMessage(message);
+
+                                        }
+                                    } catch (Exception e) {
+                                        Message message = new Message();
+                                        message.what = NOT_RESPONSE;
+                                        handler.sendMessage(message);
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }).start();
+                        }
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                dialog.show();
+            }
+        });
+
+
+
+
+
         uploadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +267,7 @@ public class UploadActivity extends AppCompatActivity {
     private void showDialog() {
         WindowManager wm = getWindowManager();
         int mWidth = wm.getDefaultDisplay().getWidth();
-        DialogUtil.showItemSelectDialog(UploadActivity.this,mWidth,onIllegalListener,"相机拍摄","从相册中选择");//可填添加任意多个Item呦  
+        DialogUtil.showItemSelectDialog(UploadActivity.this,mWidth,onIllegalListener,"相机拍摄","从相册中选择");//可填添加任意多个Item呦  
     }
 
     private OnItemSelectedListener onIllegalListener=new OnItemSelectedListener(){

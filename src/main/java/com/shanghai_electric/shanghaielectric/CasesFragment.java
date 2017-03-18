@@ -43,6 +43,8 @@ public class CasesFragment extends Fragment {
     public static final int UPDAT_TEXT4=4;
     public static final int UPDAT_TEXT5=5;
     public static final int SHOW_ANSWER2=6;
+    public static final int NOT_RESPONSE=-1;
+    public static final int LIST_NOT_RESPONSE=-2;
 
 
     private Spinner queryDevice,queryComponent;
@@ -51,13 +53,14 @@ public class CasesFragment extends Fragment {
     private EditText fuzzyQuery,casesName;
     private TextView moreChoices;
     private LinearLayout fuzzyCasesLayout;
+    private CustomDialog dialog;
 
     String[] defaultString1 = new String[]{"请选择"};
     String[] defaultString2 = new String[]{"请先选择设备"};
     String[] arr = defaultString1;
     String[] arr1 = defaultString2;
-    String device = null;
-    String component = null;
+    String device = "";
+    String component = "";
     String fuzzyWord = null;
     String casesNameword = null;
 
@@ -74,8 +77,16 @@ public class CasesFragment extends Fragment {
                     break;
                 case SHOW_ANSWER2:
                     String ans = (String)msg.obj;
+                    dialog.cancel();
                     ResultListActivity.actionStart(getActivity(),ans);
-
+                    break;
+                case NOT_RESPONSE:
+                    dialog.cancel();
+                    Toast.makeText(getActivity(), "获取查询结果失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case LIST_NOT_RESPONSE:
+                    dialog.cancel();
+                    Toast.makeText(getActivity(), "获取查询列表失败", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -90,6 +101,8 @@ public class CasesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        dialog = new CustomDialog(getActivity(),R.style.CustomDialog);
+        dialog.show();
         queryDevice = (Spinner)getActivity().findViewById(R.id.cases_device);
         queryComponent = (Spinner) getActivity().findViewById(R.id.cases_component);
         queryQuery = (Button)getActivity().findViewById(R.id.cases_query);
@@ -144,10 +157,10 @@ public class CasesFragment extends Fragment {
                 }else {
                     fuzzyWord = fuzzyQuery.getText().toString();
                     casesNameword = casesName.getText().toString();
-                    if(device==null || component ==null){
+                    if((device.isEmpty() || component.isEmpty())&&(fuzzyWord.trim().isEmpty())&&(casesNameword.trim().isEmpty())){
                         Toast.makeText(getContext(), "请填写完整查询信息", Toast.LENGTH_SHORT).show();
                     }else {
-
+                        dialog.show();
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -160,7 +173,11 @@ public class CasesFragment extends Fragment {
                                             .add("device",device)
                                             .add("component",component)
                                             .add("fuzzyWord",fuzzyWord)
-                                            .add("casesName",casesNameword)
+                                            .add("caseName",casesNameword)
+                                            .add("plantName","")
+                                            .add("information","")
+                                            .add("supplier","")
+                                            .add("troubleName","")
                                             .build();
                                     Request request = new Request.Builder()
                                             .url(url)
@@ -174,9 +191,14 @@ public class CasesFragment extends Fragment {
                                         message.obj = responseData;
                                         handler.sendMessage(message);
                                     }else{
-
+                                        Message message = new Message();
+                                        message.what = NOT_RESPONSE;
+                                        handler.sendMessage(message);
                                     }
                                 } catch (Exception e) {
+                                    Message message = new Message();
+                                    message.what = NOT_RESPONSE;
+                                    handler.sendMessage(message);
                                     e.printStackTrace();
                                 }
                             }
@@ -198,7 +220,7 @@ public class CasesFragment extends Fragment {
                         initComponent(i);
                         device = (String)queryDevice.getSelectedItem();
                     }else{
-                        device=null;
+                        device="";
                         arr1 = defaultString2;
                         initSpinner2();
                         queryComponent.setEnabled(false);
@@ -219,7 +241,7 @@ public class CasesFragment extends Fragment {
                     if (i != 0) {
                         component = (String) queryComponent.getSelectedItem();
                     } else {
-                        component = null;
+                        component = "";
                     }
 
             }
@@ -236,15 +258,15 @@ public class CasesFragment extends Fragment {
     }
 
     private void initSpinner1(){
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,arr);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,R.id.text_spinner,arr);
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_drop_down_item);
         queryDevice.setAdapter(arrayAdapter);
-
+        dialog.cancel();
 
     }
     private void initSpinner2(){
-        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,arr1);
-        arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,R.id.text_spinner,arr1);
+        arrayAdapter1.setDropDownViewResource(R.layout.spinner_drop_down_item);
         queryComponent.setAdapter(arrayAdapter1);
         queryComponent.setEnabled(true);
 
@@ -253,39 +275,50 @@ public class CasesFragment extends Fragment {
     private void initString(){
         final String url = getString(R.string.url)
                 +getString(R.string.primary_path)+"/device";
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    final Response response = client.newCall(request).execute();
-                    if(response.isSuccessful()){
-                        final String resoponseData = response.body().string();
-                        JSONArray jsonArray = new JSONArray(resoponseData);
-                        String[] tmp = new String[jsonArray.length()+1];
-                        tmp[0]="请选择";
-                        for(int i = 0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String name = jsonObject.getString("name");
-                            tmp[i+1] = name;
-                        }
-                        Message message = new Message();
-                        message.what = UPDAT_TEXT4;
-                        message.obj = tmp;
-                        handler.sendMessage(message);
+        if(!NetWorkUtil.isNetworkConnected(getActivity())){
+            initSpinner1();
+            dialog.cancel();
+            Toast.makeText(getContext(), "网络不可用，无法获取查询选项", Toast.LENGTH_SHORT).show();
+        }else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        OkHttpClient client = new OkHttpClient();
+                        Request request = new Request.Builder()
+                                .url(url)
+                                .build();
+                        final Response response = client.newCall(request).execute();
+                        if (response.isSuccessful()) {
+                            final String resoponseData = response.body().string();
+                            JSONArray jsonArray = new JSONArray(resoponseData);
+                            String[] tmp = new String[jsonArray.length() + 1];
+                            tmp[0] = "请选择";
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String name = jsonObject.getString("name");
+                                tmp[i + 1] = name;
+                            }
+                            Message message = new Message();
+                            message.what = UPDAT_TEXT4;
+                            message.obj = tmp;
+                            handler.sendMessage(message);
 
+                        } else {
+                            Message message = new Message();
+                            message.what = LIST_NOT_RESPONSE;
+                            handler.sendMessage(message);
+                            LogUtil.e("aaaaaaa", "sibai");
+                        }
+                    } catch (Exception e) {
+                        Message message = new Message();
+                        message.what = LIST_NOT_RESPONSE;
+                        handler.sendMessage(message);
+                        e.printStackTrace();
                     }
-                    else{
-                        LogUtil.e("aaaaaaa","sibai");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-        }).start();
+            }).start();
+        }
     }
 
     private void initComponent(int component){
@@ -334,9 +367,16 @@ public class CasesFragment extends Fragment {
 
                     }
                     else{
+                        //此处应有网络异常处理
+                        Message message = new Message();
+                        message.what = LIST_NOT_RESPONSE;
+                        handler.sendMessage(message);
                         LogUtil.e("aaaaaaa","sibai");
                     }
                 } catch (Exception e) {
+                    Message message = new Message();
+                    message.what = LIST_NOT_RESPONSE;
+                    handler.sendMessage(message);
                     e.printStackTrace();
                 }
             }

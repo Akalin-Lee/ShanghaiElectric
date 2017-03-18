@@ -50,20 +50,24 @@ public class QueryFragment  extends Fragment{
     public static final int UPDAT_TEXT1=1;
     public static final int UPDAT_TEXT2=2;
     public static final int SHOW_ANSWER=3;
+    public static final int NOT_RESPONSE=-1;
+    public static final int LIST_NOT_RESPONSE=-2;
+
     private Spinner queryDevice,queryComponent;
     private Button queryQuery;
     private CheckBox isFuzzyQuery;
     private EditText fuzzyQuery;
     private TextView moreChoices;
-    private ProgressBar progressbar;
+//    private ProgressBar progressbar;
     private LinearLayout fuzzyQueryLayout;
+    private CustomDialog dialog;
 
     String[] defaultString1 = new String[]{"请选择"};
     String[] defaultString2 = new String[]{"请先选择设备"};
     String[] arr = defaultString1;
     String[] arr1 = defaultString2;
-    String device = null;
-    String component = null;
+    String device = "";
+    String component ="";
     String fuzzyWord = null;
 
     private Handler handler = new Handler(){
@@ -79,8 +83,20 @@ public class QueryFragment  extends Fragment{
                     break;
                 case SHOW_ANSWER:
                     String ans = (String)msg.obj;
+                    dialog.cancel();
 //                    Toast.makeText(getContext(), ans, Toast.LENGTH_SHORT).show();
                     RuleShowActivity.actionStart(getActivity(),ans);
+                    break;
+                case NOT_RESPONSE:
+                    dialog.cancel();
+                    Toast.makeText(getActivity(), "获取查询结果失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case LIST_NOT_RESPONSE:
+                    dialog.cancel();
+                    Toast.makeText(getActivity(), "获取查询列表失败", Toast.LENGTH_SHORT).show();
+                    break;
+
+
             }
         }
     };
@@ -94,13 +110,15 @@ public class QueryFragment  extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        dialog = new CustomDialog(getActivity(),R.style.CustomDialog);
+        dialog.show();
         queryDevice = (Spinner)getActivity().findViewById(R.id.query_device);
         queryComponent = (Spinner)getActivity().findViewById(R.id.query_component);
         queryQuery = (Button)getActivity().findViewById(R.id.query_query);
         isFuzzyQuery = (CheckBox)getActivity().findViewById(R.id.is_fuzzy_query);
         fuzzyQuery = (EditText)getActivity().findViewById(R.id.fuzzy_query_text);
         moreChoices = (TextView) getActivity().findViewById(R.id.query_more_choices);
-        progressbar = (ProgressBar)getActivity().findViewById(R.id.progress_bar_query);
+//        progressbar = (ProgressBar)getActivity().findViewById(R.id.progress_bar_query);
         fuzzyQueryLayout = (LinearLayout)getActivity().findViewById(R.id.fuzzy_query_layout);
         final KeyListener key = fuzzyQuery.getKeyListener();
 
@@ -144,19 +162,12 @@ public class QueryFragment  extends Fragment{
                 if(!NetWorkUtil.isNetworkConnected(getActivity())){
                     Toast.makeText(getContext(), "网络不可用，请检查您的网络设置", Toast.LENGTH_SHORT).show();
                 }else {
-                if(device==null || component ==null){
+                    fuzzyWord = fuzzyQuery.getText().toString();
+//                    LogUtil.e("aaa","----"+fuzzyWord+"----");
+                if((device.isEmpty() || component.isEmpty())&&(fuzzyWord.trim().isEmpty())){
                     Toast.makeText(getContext(), "请填写完整查询信息", Toast.LENGTH_SHORT).show();
                 }else {
-//                    String url = getString(R.string.url)+getString(R.string.primary_path)+getString(R.string.rule_path)+"?"
-//                            +"device="+device+"&"
-//                            +"component="+component;
-                    fuzzyWord = fuzzyQuery.getText().toString();
-//                    if(fuzzyWord!=""){
-//                        url = url+"&"+"fuzzyWord="+fuzzyWord;
-//                    }
-//                    Toast.makeText(getContext(),url, Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), RuleShowActivity.class);
-//                    startActivity(intent);
+                    dialog.show();
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -169,6 +180,7 @@ public class QueryFragment  extends Fragment{
                                         .add("device",device)
                                         .add("component",component)
                                         .add("fuzzyWord",fuzzyWord)
+                                        .add("troubleName","")
                                         .build();
                                 Request request = new Request.Builder()
                                         .url(url)
@@ -181,8 +193,17 @@ public class QueryFragment  extends Fragment{
                                     message.what = SHOW_ANSWER;
                                     message.obj = responseData;
                                     handler.sendMessage(message);
-                                }else{}
+                                }else{
+                                    LogUtil.e("aa","11111111111111");
+                                    Message message = new Message();
+                                    message.what = NOT_RESPONSE;
+                                    handler.sendMessage(message);
+                                }
                             } catch (Exception e) {
+                                LogUtil.e("aa","222222222222221");
+                                Message message = new Message();
+                                message.what = NOT_RESPONSE;
+                                handler.sendMessage(message);
                                 e.printStackTrace();
                             }
                         }
@@ -199,13 +220,13 @@ public class QueryFragment  extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!NetWorkUtil.isNetworkConnected(getActivity())){
-                    Toast.makeText(getContext(), "网络不可用，无法获取查询选项", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "网络不可用，无法获取部件列表", Toast.LENGTH_SHORT).show();
                 }else {
                     if (i != 0) {
                         initComponent(i);
                         device = (String)queryDevice.getSelectedItem();
                     }else{
-                        device=null;
+                        device="";
                         arr1 = defaultString2;
                         initSpinner2();
                         queryComponent.setEnabled(false);
@@ -226,7 +247,7 @@ public class QueryFragment  extends Fragment{
                 if (i != 0) {
                     component = (String)queryComponent.getSelectedItem();
                 }else{
-                    component=null;
+                    component="";
                 }
             }
 
@@ -256,109 +277,129 @@ public class QueryFragment  extends Fragment{
 //    });
     }
     private void initSpinner1(){
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,arr);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,R.id.text_spinner,arr);
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_drop_down_item);
         queryDevice.setAdapter(arrayAdapter);
-        progressbar.setVisibility(View.GONE);
-
+//        progressbar.setVisibility(View.GONE);
+        dialog.cancel();
     }
     private void initSpinner2(){
-        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,arr1);
-        arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,R.id.text_spinner,arr1);
+        arrayAdapter1.setDropDownViewResource(R.layout.spinner_drop_down_item);
         queryComponent.setAdapter(arrayAdapter1);
         queryComponent.setEnabled(true);
 
     }
     private void initComponent(int component){
-        String url1 = null;
-            switch(component){
+            String url1 = null;
+            switch (component) {
                 case 1:
                     url1 = getString(R.string.url)
-                            +getString(R.string.primary_path)+"/device/turbine";
+                            + getString(R.string.primary_path) + "/device/turbine";
                     break;
                 case 2:
-                    url1 =getString(R.string.url)
-                            +getString(R.string.primary_path)+"/device/generator";
+                    url1 = getString(R.string.url)
+                            + getString(R.string.primary_path) + "/device/generator";
                     break;
                 case 3:
-                    url1 =getString(R.string.url)
-                            +getString(R.string.primary_path)+"/device/condenser";
+                    url1 = getString(R.string.url)
+                            + getString(R.string.primary_path) + "/device/condenser";
                     break;
                 default:
                     break;
             }
-        final String url2 = url1;
+            final String url2 = url1;
 //        progressbar.setVisibility(View.VISIBLE);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url2)
-                            .build();
-                    final Response response = client.newCall(request).execute();
-                    if(response.isSuccessful()){
-                        final String resoponseData = response.body().string();
-                        JSONArray jsonArray = new JSONArray(resoponseData);
-                        String[] tmp = new String[jsonArray.length()+1];
-                        tmp[0]="请选择";
-                        for(int i = 0;i<jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String name = jsonObject.getString("name");
-                            tmp[i+1] = name;
-                        }
-                        Message message = new Message();
-                        message.what = UPDAT_TEXT2;
-                        message.obj = tmp;
-                        handler.sendMessage(message);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        OkHttpClient client = new OkHttpClient();
+                        Request request = new Request.Builder()
+                                .url(url2)
+                                .build();
+                        final Response response = client.newCall(request).execute();
+                        if (response.isSuccessful()) {
+                            final String resoponseData = response.body().string();
+                            JSONArray jsonArray = new JSONArray(resoponseData);
+                            String[] tmp = new String[jsonArray.length() + 1];
+                            tmp[0] = "请选择";
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String name = jsonObject.getString("name");
+                                tmp[i + 1] = name;
+                            }
+                            Message message = new Message();
+                            message.what = UPDAT_TEXT2;
+                            message.obj = tmp;
+                            handler.sendMessage(message);
 
+                        } else {
+                            Message message = new Message();
+                            message.what = LIST_NOT_RESPONSE;
+                            handler.sendMessage(message);
+                            LogUtil.e("aaaaaaa", "sibai");
+                        }
+                        //此处需要有网络异常的处理
+                    } catch (Exception e) {
+                        Message message = new Message();
+                        message.what = LIST_NOT_RESPONSE;
+                        handler.sendMessage(message);
+                        LogUtil.e("aaaaaaa", "sibai");
+                        e.printStackTrace();
                     }
-                    else{
-                        LogUtil.e("aaaaaaa","sibai");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-        }).start();
+            }).start();
+
     }
     private void initString(){
         final String url = getString(R.string.url)
                 +getString(R.string.primary_path)+"/device";
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    final Response response = client.newCall(request).execute();
-                    if(response.isSuccessful()){
+        if(!NetWorkUtil.isNetworkConnected(getActivity())){
+            initSpinner1();
+            dialog.cancel();
+            Toast.makeText(getContext(), "网络不可用，无法获取查询选项", Toast.LENGTH_SHORT).show();
+        }else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        OkHttpClient client = new OkHttpClient();
+                        Request request = new Request.Builder()
+                                .url(url)
+                                .build();
+                        final Response response = client.newCall(request).execute();
+                        if (response.isSuccessful()) {
                             final String resoponseData = response.body().string();
                             JSONArray jsonArray = new JSONArray(resoponseData);
-                            String[] tmp = new String[jsonArray.length()+1];
-                            tmp[0]="请选择";
-                            for(int i = 0;i<jsonArray.length();i++){
+                            String[] tmp = new String[jsonArray.length() + 1];
+                            tmp[0] = "请选择";
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 String name = jsonObject.getString("name");
-                                tmp[i+1] = name;
+                                tmp[i + 1] = name;
                             }
                             Message message = new Message();
                             message.what = UPDAT_TEXT1;
                             message.obj = tmp;
                             handler.sendMessage(message);
 
+                        } else {
+                            Message message = new Message();
+                            message.what = LIST_NOT_RESPONSE;
+                            handler.sendMessage(message);
+                            LogUtil.e("aaaaaaa", "sibai");
+                        }
+                    } catch (Exception e) {
+                        Message message = new Message();
+                        message.what = LIST_NOT_RESPONSE;
+                        handler.sendMessage(message);
+                        e.printStackTrace();
+                        //此处需要有网络异常的处理
                     }
-                    else{
-                        LogUtil.e("aaaaaaa","sibai");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-        }).start();
+            }).start();
+        }
     }
 
 

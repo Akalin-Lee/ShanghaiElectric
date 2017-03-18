@@ -44,6 +44,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
     <ImageView
@@ -67,6 +69,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
     <ImageView
@@ -125,8 +129,7 @@
             android:background="@drawable/edit_shape"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
+            android:padding="5dp"
             android:focusable="false"/>
     </LinearLayout>
     <LinearLayout
@@ -142,10 +145,10 @@
             android:textSize="@dimen/button_text_size"
             android:layout_margin="20dp"/>
     </LinearLayout>
-    <ProgressBar
-        android:id="@+id/progress_bar_query"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminateDrawable="@drawable/progressbar"/>
+    <!--<ProgressBar-->
+        <!--android:id="@+id/progress_bar_query"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:indeterminateDrawable="@drawable/progressbar"/>-->
 
 </LinearLayout>

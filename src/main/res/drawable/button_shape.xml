@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <shape xmlns:android="http://schemas.android.com/apk/res/android">
-        <solid android:color="#3F51B5"/>  
-        <corners android:radius="15px"/>  
-        <stroke android:color="#3F51B5"
-            android:width="5px"
-    />  
-    </shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true" android:drawable="@drawable/button_shape_press"/>
+    <item android:drawable="@drawable/button_shape_not_press"/>
+
+</selector>
 

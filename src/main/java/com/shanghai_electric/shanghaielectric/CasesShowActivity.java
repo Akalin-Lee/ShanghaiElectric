@@ -47,6 +47,7 @@ public class CasesShowActivity extends AppCompatActivity {
     private List<InflunceFactor> influnceFactors;
     private String attachment_url;
     private File file;
+    String downloadUrl;
 
     TextView case_name;
     TextView trouble;
@@ -72,7 +73,9 @@ public class CasesShowActivity extends AppCompatActivity {
                     boolean show = (boolean)msg.obj;
                     if(show){
                     Intent intent = new Intent();
-                    intent.setAction(android.content.Intent.ACTION_VIEW);
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.addCategory("android.intent.category.DEFAULT");
+//                    intent.setAction(android.content.Intent.ACTION_VIEW);
                     intent.setDataAndType(Uri.fromFile(file), "application/pdf");
                     startActivity(intent);}
                     else{
@@ -130,9 +133,9 @@ public class CasesShowActivity extends AppCompatActivity {
         Intent intent2 = new Intent(this, DownloadService.class);
         startService(intent2); // 启动服务
         bindService(intent2, connection, BIND_AUTO_CREATE); // 绑定服务
-        if (ContextCompat.checkSelfPermission(CasesShowActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(CasesShowActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
-        }
+//        if (ContextCompat.checkSelfPermission(CasesShowActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(CasesShowActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 1);
+//        }
 
 
 
@@ -178,7 +181,7 @@ public class CasesShowActivity extends AppCompatActivity {
         attachment_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String downloadUrl = getString(R.string.url)+caseShow.getAttachment_url();
+                downloadUrl = getString(R.string.url)+caseShow.getAttachment_url();
                 long downloadedLength = 0;
                 String fileName = downloadUrl.substring(downloadUrl.lastIndexOf("/"));
                 String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
@@ -215,7 +218,11 @@ public class CasesShowActivity extends AppCompatActivity {
 
 
                 }else{
-                    downloadBinder.startDownload(downloadUrl);
+                    if (ContextCompat.checkSelfPermission(CasesShowActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(CasesShowActivity.this, new String[]{ Manifest.permission. WRITE_EXTERNAL_STORAGE }, 2);
+                    }else {
+                        downloadBinder.startDownload(downloadUrl);
+                    }
                 }
 
             }
@@ -237,7 +244,13 @@ public class CasesShowActivity extends AppCompatActivity {
             case 1:
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "拒绝权限将无法下载附件", Toast.LENGTH_SHORT).show();
-                    finish();
+                }
+                break;
+            case 2:
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "拒绝权限将无法下载附件", Toast.LENGTH_SHORT).show();
+                }else{
+                    downloadBinder.startDownload(downloadUrl);
                 }
                 break;
             default:

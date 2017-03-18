@@ -31,6 +31,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_centerHorizontal="true"
+                    android:tint="@color/icon_off"
                     android:src="@drawable/query"
                     android:contentDescription="@null"/>
 
@@ -41,7 +42,7 @@
                     android:layout_below="@id/query_img"
                     android:layout_centerHorizontal="true"
                     android:text="@string/query"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/icon_off"
                     android:textSize="12sp" />
             </RelativeLayout>
 
@@ -56,6 +57,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_centerHorizontal="true"
+                    android:tint="@color/icon_off"
                     android:src="@drawable/cases"
                     android:contentDescription="@null" />
 
@@ -66,7 +68,7 @@
                     android:layout_below="@+id/cases_img"
                     android:layout_centerHorizontal="true"
                     android:text="@string/cases"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/icon_off"
                     android:textSize="12sp" />
             </RelativeLayout>
 
@@ -81,6 +83,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_centerHorizontal="true"
+                    android:tint="@color/icon_off"
                     android:src="@drawable/upload"
                     android:contentDescription="@null" />
 
@@ -92,7 +95,7 @@
                     android:layout_below="@+id/upload_img"
                     android:layout_centerHorizontal="true"
                     android:text="@string/upload"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/icon_off"
                     android:textSize="12sp" />
             </RelativeLayout>
 
@@ -107,6 +110,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_centerHorizontal="true"
+                    android:tint="@color/icon_off"
                     android:src="@drawable/user"
                     android:contentDescription="@null" />
 
@@ -118,7 +122,7 @@
                     android:layout_below="@+id/user_img"
                     android:layout_centerHorizontal="true"
                     android:text="@string/user"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/icon_off"
                     android:textSize="12sp" />
             </RelativeLayout>
         </LinearLayout>

@@ -13,9 +13,9 @@
       <gradient
             android:type="sweep"
     android:useLevel="false"
-    android:startColor="#555555"
+    android:startColor="#ffffff"
     android:centerColor="#aaaaaa"
     android:centerY="0.50"
-    android:endColor="#FFFFFF"/></shape>
+    android:endColor="#555555"/></shape>
     </animated-rotate>
 

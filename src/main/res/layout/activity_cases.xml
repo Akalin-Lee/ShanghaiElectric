@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
@@ -30,6 +32,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
             <ImageView
@@ -54,6 +58,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
             <ImageView
@@ -78,6 +84,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
             <ImageView
@@ -97,12 +105,19 @@
             android:gravity="center"
             android:textSize="18sp"
             android:text="@string/cases_name"/>
-        <EditText
+        <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
             android:id="@+id/query_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:drawableRight="@drawable/ic_delete_01"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="10dp"
+            android:textCursorDrawable="@drawable/cursor"
+            app:deletecolor="@color/one_clear"
+            />
     </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -121,12 +136,19 @@
             android:gravity="center"
             android:textSize="18sp"
             android:text="@string/information"/>
-        <EditText
+        <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
             android:id="@+id/query_information"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:drawableRight="@drawable/ic_delete_01"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="10dp"
+            android:textCursorDrawable="@drawable/cursor"
+            app:deletecolor="@color/one_clear"
+            />
     </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -145,12 +167,20 @@
             android:gravity="center"
             android:textSize="18sp"
             android:text="@string/supplier"/>
-        <EditText
+        <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
             android:id="@+id/query_supplier"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:drawableRight="@drawable/ic_delete_01"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="10dp"
+            android:textCursorDrawable="@drawable/cursor"
+            app:deletecolor="@color/one_clear"
+            />
+
     </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -169,42 +199,80 @@
             android:gravity="center"
             android:textSize="18sp"
             android:text="@string/trouble_name"/>
-        <EditText
+        <com.shanghai_electric.shanghaielectric.customeLayout.OneKeyClearEditText
             android:id="@+id/query_trouble"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:drawableRight="@drawable/ic_delete_01"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="10dp"
+            android:textCursorDrawable="@drawable/cursor"
+            app:deletecolor="@color/one_clear"
+            />
     </LinearLayout>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/split_line" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <CheckBox
-            android:id="@+id/is_fuzzy_query"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<CheckBox-->
+            <!--android:id="@+id/is_fuzzy_query"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="@string/fuzzy_query"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <EditText
-            android:id="@+id/fuzzy_query_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:focusable="false"/>
-    </LinearLayout>
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="18sp"-->
+            <!--android:text="@string/fuzzy_query"/>-->
+    <!--</LinearLayout>-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:text="@string/more_word"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/fuzzy_query_layout"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                >
+                <EditText
+                    android:id="@+id/fuzzy_query_text"
+                    android:background="@drawable/edit_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp"/>
+            </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp">-->
+        <!--<EditText-->
+            <!--android:id="@+id/fuzzy_query_text"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:focusable="false"/>-->
+    <!--</LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

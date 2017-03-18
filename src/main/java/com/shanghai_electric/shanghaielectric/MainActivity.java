@@ -67,15 +67,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             queryImg.setImageResource(R.drawable.query_on);
             queryTv.setTextColor(getResources()
                     .getColor(R.color.bottomtab_on));
+            queryImg.setColorFilter(getResources().getColor(R.color.icon_on));
+
             casesImg.setImageResource(R.drawable.cases);
             casesTv.setTextColor(getResources().getColor(
                     R.color.bottomtab_off));
+            casesImg.setColorFilter(getResources().getColor(R.color.icon_off));
+
             uploadImg.setImageResource(R.drawable.upload);
             uploadTv.setTextColor(getResources().getColor(
                     R.color.bottomtab_off));
+            uploadImg.setColorFilter(getResources().getColor(R.color.icon_off));
+
             userImg.setImageResource(R.drawable.user);
             userTv.setTextColor(getResources().getColor(
                     R.color.bottomtab_off));
+            userImg.setColorFilter(getResources().getColor(R.color.icon_off));
 
         }
     }
@@ -112,15 +119,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         queryImg.setImageResource(R.drawable.query_on);
         queryTv.setTextColor(getResources()
                 .getColor(R.color.bottomtab_on));
+        queryImg.setColorFilter(getResources().getColor(R.color.icon_on));
+
         casesImg.setImageResource(R.drawable.cases);
         casesTv.setTextColor(getResources().getColor(
                 R.color.bottomtab_off));
+        casesImg.setColorFilter(getResources().getColor(R.color.icon_off));
+
         uploadImg.setImageResource(R.drawable.upload);
         uploadTv.setTextColor(getResources().getColor(
                 R.color.bottomtab_off));
+        uploadImg.setColorFilter(getResources().getColor(R.color.icon_off));
+
         userImg.setImageResource(R.drawable.user);
         userTv.setTextColor(getResources().getColor(
                 R.color.bottomtab_off));
+        userImg.setColorFilter(getResources().getColor(R.color.icon_off));
     }
 
     private void clickTab2Layout() {
@@ -133,15 +147,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         queryImg.setImageResource(R.drawable.query);
         queryTv.setTextColor(getResources()
                 .getColor(R.color.bottomtab_off));
+        queryImg.setColorFilter(getResources().getColor(R.color.icon_off));
+
         casesImg.setImageResource(R.drawable.cases_on);
         casesTv.setTextColor(getResources().getColor(
                 R.color.bottomtab_on));
+        casesImg.setColorFilter(getResources().getColor(R.color.icon_on));
+
         uploadImg.setImageResource(R.drawable.upload);
         uploadTv.setTextColor(getResources().getColor(
                 R.color.bottomtab_off));
+        uploadImg.setColorFilter(getResources().getColor(R.color.icon_off));
+
         userImg.setImageResource(R.drawable.user);
         userTv.setTextColor(getResources().getColor(
                 R.color.bottomtab_off));
+        userImg.setColorFilter(getResources().getColor(R.color.icon_off));
     }
 
     private void clickTab3Layout() {
@@ -193,15 +214,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         queryImg.setImageResource(R.drawable.query);
         queryTv.setTextColor(getResources()
                 .getColor(R.color.bottomtab_off));
+        queryImg.setColorFilter(getResources().getColor(R.color.icon_off));
+
         casesImg.setImageResource(R.drawable.cases);
         casesTv.setTextColor(getResources().getColor(
                 R.color.bottomtab_off));
+        casesImg.setColorFilter(getResources().getColor(R.color.icon_off));
+
         uploadImg.setImageResource(R.drawable.upload);
         uploadTv.setTextColor(getResources().getColor(
                 R.color.bottomtab_off));
+        uploadImg.setColorFilter(getResources().getColor(R.color.icon_off));
+
         userImg.setImageResource(R.drawable.user_on);
         userTv.setTextColor(getResources().getColor(
                 R.color.bottomtab_on));
+        userImg.setColorFilter(getResources().getColor(R.color.icon_on));
     }
 
     /**
